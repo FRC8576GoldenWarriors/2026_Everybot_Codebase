@@ -76,14 +76,14 @@ public class RobotContainer {
     driverController.leftBumper().whileTrue(new Intake(fuelSubsystem));
     // While the right bumper on the operator controller is held, spin up for 1
     // second, then launch fuel. When the button is released, stop.
-  //   driverController.rightBumper().whileTrue(new LaunchSequence(fuelSubsystem));
+    driverController.rightBumper().whileTrue(new LaunchSequence(fuelSubsystem));
   //   // While the A button is held on the operator controller, eject fuel back out
   //   // the intake
-  //   driverController.a().whileTrue(new Eject(fuelSubsystem));
+    driverController.a().whileTrue(new Eject(fuelSubsystem));
   //  // While the down arrow on the directional pad is held it will unclimb the robot
-  //   driverController.povDown().whileTrue(new ClimbDown(climberSubsystem));
+    driverController.povDown().whileTrue(new ClimbDown(climberSubsystem));
   //   // While the up arrow on the directional pad is held it will cimb the robot
-  //   driverController.povUp().whileTrue(new ClimbUp(climberSubsystem));
+    driverController.povUp().whileTrue(new ClimbUp(climberSubsystem));
 
     
 
@@ -94,9 +94,9 @@ public class RobotContainer {
     // value)
     driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, driverController));
 
-    //fuelSubsystem.setDefaultCommand(fuelSubsystem.run(() -> fuelSubsystem.stop()));
+    fuelSubsystem.setDefaultCommand(fuelSubsystem.run(() -> fuelSubsystem.stop()));
 
-    //climberSubsystem.setDefaultCommand(climberSubsystem.run(() -> climberSubsystem.stop()));
+    climberSubsystem.setDefaultCommand(climberSubsystem.run(() -> climberSubsystem.stop()));
 
   }
 
