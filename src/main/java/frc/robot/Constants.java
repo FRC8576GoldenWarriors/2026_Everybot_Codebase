@@ -22,10 +22,10 @@ public final class Constants {
 
   public static final class DriveConstants {
     // Motor controller IDs for drivetrain motors
-    public static final int LEFT_LEADER_ID = 2;
-    public static final int LEFT_FOLLOWER_ID = 1;
-    public static final int RIGHT_LEADER_ID = 7;
-    public static final int RIGHT_FOLLOWER_ID = 8;
+    public static final int LEFT_LEADER_ID = 1;
+    public static final int LEFT_FOLLOWER_ID = 3;
+    public static final int RIGHT_LEADER_ID = 2;
+    public static final int RIGHT_FOLLOWER_ID = 4;
 
     // Current limit for drivetrain motors. 60A is a reasonable maximum to reduce
     // likelihood of tripping breakers or damaging CIM motors
@@ -36,19 +36,22 @@ public final class Constants {
     // Motor controller IDs for Fuel Mechanism motors
     public static final int LEFT_INTAKE_LAUNCHER_MOTOR_ID = 5;
     public static final int RIGHT_INTAKE_LAUNCHER_MOTOR_ID = 6;
-    public static final int INDEXER_MOTOR_ID = 3;
+    public static final boolean LEFT_INTAKE_INVERTED = false;
+    public static final boolean RIGHT_INTAKE_INVERTED = true;
+    public static final int INDEXER_MOTOR_ID = 7;
+    public static final boolean INDEXER_INVERTED = true;
 
     // Current limit for fuel mechanism motors.
     public static final int INDEXER_MOTOR_CURRENT_LIMIT = 60;
     public static final int LAUNCHER_MOTOR_CURRENT_LIMIT = 60;
 
     // All values likely need to be tuned based on your robot
-    public static final double INDEXER_INTAKING_PERCENT = -.8; 
-    public static final double INDEXER_LAUNCHING_PERCENT = 0.6;
+    public static final double INDEXER_INTAKING_PERCENT = -.3; 
+    public static final double INDEXER_LAUNCHING_PERCENT = 0.5;
     public static final double INDEXER_SPIN_UP_PRE_LAUNCH_PERCENT = -0.5;
 
-    public static final double INTAKE_INTAKING_PERCENT = 0.6;
-    public static final double LAUNCHING_LAUNCHER_PERCENT = .85;
+    public static final double INTAKE_INTAKING_PERCENT = -0.6;
+    public static final double LAUNCHING_LAUNCHER_PERCENT = -.85;
     public static final double INTAKE_EJECT_PERCENT = -0.8;
 
     public static final double SPIN_UP_SECONDS = 0.75;
@@ -56,7 +59,7 @@ public final class Constants {
 
   public static final class ClimbConstatns {
     // Motor controller IDs for Climb motor
-    public static final int CLIMBER_MOTOR_ID = 14;
+    public static final int CLIMBER_MOTOR_ID = 8;
 
     // Current limit for climb motor
     public static final int CLIMBER_MOTOR_CURRENT_LIMIT = 40;
