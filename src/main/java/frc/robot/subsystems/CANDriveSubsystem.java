@@ -12,6 +12,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.DriveConstants.*;
 
@@ -71,6 +72,10 @@ public class CANDriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Left Leader Velocity", leftLeader.get());
+    SmartDashboard.putNumber("Left Follower Velocity", leftFollower.get());
+    SmartDashboard.putNumber("Right Leader Velocity", rightLeader.get());
+    SmartDashboard.putNumber("Right Follower Velocity", rightFollower.get());
   }
 
   public void driveArcade(double xSpeed, double zRotation) {

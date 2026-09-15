@@ -26,8 +26,8 @@ public class SpinUp extends Command {
   public void initialize() {
     fuelSubsystem
         .setIntakeLauncherRoller(
-            SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_PERCENT));
-    fuelSubsystem.setFeederRoller(SmartDashboard.getNumber("Launching spin-up feeder value", INDEXER_SPIN_UP_PRE_LAUNCH_PERCENT));
+            SmartDashboard.getNumber("LAUNCHING_LAUNCHER_PERCENT", LAUNCHING_LAUNCHER_PERCENT));
+    fuelSubsystem.setFeederRoller(SmartDashboard.getNumber("INDEXER_SPIN_UP_PRE_LAUNCH_PERCENT", INDEXER_SPIN_UP_PRE_LAUNCH_PERCENT));
   }
 
   // Called every time the scheduler runs while the command is scheduled. This

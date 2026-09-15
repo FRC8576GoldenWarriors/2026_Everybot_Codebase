@@ -26,8 +26,8 @@ public class Launch extends Command {
   public void initialize() {
     fuelSubsystem
         .setIntakeLauncherRoller(
-            SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_PERCENT));
-    fuelSubsystem.setFeederRoller(SmartDashboard.getNumber("Launching feeder roller value", INDEXER_LAUNCHING_PERCENT));
+            SmartDashboard.getNumber("LAUNCHING_LAUNCHER_PERCENT", LAUNCHING_LAUNCHER_PERCENT));
+    fuelSubsystem.setFeederRoller(SmartDashboard.getNumber("INDEXER_LAUNCHING_PERCENT", INDEXER_LAUNCHING_PERCENT));
   }
 
   // Called every time the scheduler runs while the command is scheduled. This

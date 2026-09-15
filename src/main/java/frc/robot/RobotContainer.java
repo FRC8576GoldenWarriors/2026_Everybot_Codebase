@@ -87,7 +87,7 @@ public class RobotContainer {
   //   // While the up arrow on the directional pad is held it will cimb the robot
     driverController.povUp().whileTrue(new ClimbUp(climberSubsystem));
 
-    driverController.povRight().whileTrue(Commands.run(() -> fuelSubsystem.setFeederRoller(SmartDashboard.getNumber("Intaking feeder roller value", Constants.FuelConstants.INDEXER_INTAKING_PERCENT)), fuelSubsystem));
+    driverController.povRight().whileTrue(Commands.run(() -> fuelSubsystem.setFeederRoller(SmartDashboard.getNumber("INDEXER_INTAKING_PERCENT", Constants.FuelConstants.INDEXER_INTAKING_PERCENT)), fuelSubsystem));
 
     
 
