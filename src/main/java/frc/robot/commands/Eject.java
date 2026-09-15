@@ -4,15 +4,15 @@
 
 package frc.robot.commands;
 
+import static frc.robot.Constants.FuelConstants.*;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CANFuelSubsystem;
-import static frc.robot.Constants.FuelConstants.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Eject extends Command {
   /** Creates a new Intake. */
-
   CANFuelSubsystem fuelSubsystem;
 
   public Eject(CANFuelSubsystem fuelSystem) {
@@ -24,17 +24,16 @@ public class Eject extends Command {
   // appropriate values for ejecting
   @Override
   public void initialize() {
-    fuelSubsystem
-        .setIntakeLauncherRoller(
-             -1 * SmartDashboard.getNumber("INTAKE_EJECT_PERCENT", INTAKE_EJECT_PERCENT));
-     fuelSubsystem.setFeederRoller(SmartDashboard.getNumber("INDEXER_LAUNCHING_PERCENT", INDEXER_LAUNCHING_PERCENT));
+    fuelSubsystem.setIntakeLauncherRoller(
+        -1 * SmartDashboard.getNumber("INTAKE_EJECT_PERCENT", INTAKE_EJECT_PERCENT));
+    fuelSubsystem.setFeederRoller(
+        SmartDashboard.getNumber("INDEXER_LAUNCHING_PERCENT", INDEXER_LAUNCHING_PERCENT));
   }
 
   // Called every time the scheduler runs while the command is scheduled. This
   // command doesn't require updating any values while running
   @Override
-  public void execute() {
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted. Stop the rollers
   @Override

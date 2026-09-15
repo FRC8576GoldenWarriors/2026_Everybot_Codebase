@@ -11,6 +11,7 @@ import frc.robot.subsystems.CANDriveSubsystem;
 public class AutoDrive extends Command {
   /** Creates a new Drive. */
   CANDriveSubsystem driveSubsystem;
+
   double xSpeed, zRotation;
 
   public AutoDrive(CANDriveSubsystem driveSystem, double xSpeed, double zRotation) {
@@ -23,8 +24,7 @@ public class AutoDrive extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   // Setting the values here instead of in initialize feeds the watchdog on the
