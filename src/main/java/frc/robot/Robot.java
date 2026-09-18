@@ -98,10 +98,10 @@ public class Robot extends LoggedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
-    SmartDashboard.putNumber(
+    Logger.recordOutput(
         "Time Left In Shift",
         HubTracker.timeRemainingInCurrentShift().orElse(Seconds.of(-1)).in(Seconds));
-    SmartDashboard.putNumber("Match Time", HubTracker.getMatchTime());
+    Logger.recordOutput("Match Time", HubTracker.getMatchTime());
     CommandScheduler.getInstance().run();
   }
 

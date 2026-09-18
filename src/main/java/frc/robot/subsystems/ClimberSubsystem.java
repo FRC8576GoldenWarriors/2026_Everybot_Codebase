@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.ClimbConstatns.*;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -46,7 +48,7 @@ public class ClimberSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Climb/Climber Velocity", climberMotor.get());
+    Logger.recordOutput("Climb/Climber Velocity", climberMotor.get());
     var climbStatus = RevUtil.checkSparkMaxState(climberMotor.getLastError());
     climbAlert.set(climbStatus.getFirst());
     climbAlert.setText(climbStatus.getSecond());

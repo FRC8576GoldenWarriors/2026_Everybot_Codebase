@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.FuelConstants.*;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -73,11 +75,11 @@ public class CANFuelSubsystem extends SubsystemBase {
     // all commands using this subsystem pull values from the dashbaord to allow
     // you to tune the values easily, and then replace the values in Constants.java
     // with your new values. For more information, see the Software Guide.
-    SmartDashboard.putNumber("INDEXER_INTAKING_PERCENT", INDEXER_INTAKING_PERCENT);
-    SmartDashboard.putNumber("INTAKE_INTAKING_PERCENT", INTAKE_INTAKING_PERCENT);
-    SmartDashboard.putNumber("INDEXER_LAUNCHING_PERCENT", INDEXER_LAUNCHING_PERCENT);
-    SmartDashboard.putNumber("LAUNCHING_LAUNCHER_PERCENT", LAUNCHING_LAUNCHER_PERCENT);
-    // SmartDashboard.putNumber("Spin-up feeder roller value", SPIN_UP_FEEDER_VOLTAGE);
+    Logger.recordOutput("INDEXER_INTAKING_PERCENT", INDEXER_INTAKING_PERCENT);
+    Logger.recordOutput("INTAKE_INTAKING_PERCENT", INTAKE_INTAKING_PERCENT);
+    Logger.recordOutput("INDEXER_LAUNCHING_PERCENT", INDEXER_LAUNCHING_PERCENT);
+    Logger.recordOutput("LAUNCHING_LAUNCHER_PERCENT", LAUNCHING_LAUNCHER_PERCENT);
+    // Logger.recordOutput("Spin-up feeder roller value", SPIN_UP_FEEDER_VOLTAGE);
   }
 
   // A method to set the voltage of the intake roller
@@ -101,9 +103,9 @@ public class CANFuelSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Fuel/Left Intake Launcher Velocity", LeftIntakeLauncher.get());
-    SmartDashboard.putNumber("Fuel/Right Intake Launcher Velocity", RightIntakeLauncher.get());
-    SmartDashboard.putNumber("Fuel/Indexer Velocity", Indexer.get());
+    Logger.recordOutput("Fuel/Left Intake Launcher Velocity", LeftIntakeLauncher.get());
+    Logger.recordOutput("Fuel/Right Intake Launcher Velocity", RightIntakeLauncher.get());
+    Logger.recordOutput("Fuel/Indexer Velocity", Indexer.get());
 
     var leftIntakeLauncherStatus = RevUtil.checkSparkMaxState(LeftIntakeLauncher.getLastError());
     var rightIntakeLauncherStatus = RevUtil.checkSparkMaxState(RightIntakeLauncher.getLastError());

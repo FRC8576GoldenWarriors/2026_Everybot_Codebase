@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.DriveConstants.*;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -89,11 +91,11 @@ public class CANDriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Drive/Left Leader Velocity", leftLeader.get());
-    SmartDashboard.putNumber("Drive/Left Follower Velocity", leftFollower.get());
+    Logger.recordOutput("Drive/Left Leader Velocity", leftLeader.get());
+    Logger.recordOutput("Drive/Left Follower Velocity", leftFollower.get());
 
-    SmartDashboard.putNumber("Drive/Right Leader Velocity", rightLeader.get());
-    SmartDashboard.putNumber("Drive/Right Follower Velocity", rightFollower.get());
+    Logger.recordOutput("Drive/Right Leader Velocity", rightLeader.get());
+    Logger.recordOutput("Drive/Right Follower Velocity", rightFollower.get());
 
     var leftLeaderStatus = RevUtil.checkSparkMaxState(leftLeader.getLastError());
     var leftFollowerStatus = RevUtil.checkSparkMaxState(leftFollower.getLastError());
