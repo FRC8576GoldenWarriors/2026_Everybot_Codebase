@@ -40,8 +40,8 @@ public class RobotContainer {
       new CommandXboxController(DRIVER_CONTROLLER_PORT);
 
   // The operator's controller, by default it is setup to use a single controller
-  private final CommandXboxController operatorController =
-      new CommandXboxController(OPERATOR_CONTROLLER_PORT);
+  // private final CommandXboxController operatorController =
+  //     new CommandXboxController(OPERATOR_CONTROLLER_PORT);
 
   // The autonomous chooser
   private final LoggedDashboardChooser<Command> autoChooser =

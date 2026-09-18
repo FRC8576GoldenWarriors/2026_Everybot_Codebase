@@ -6,8 +6,6 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.FuelConstants.*;
 
-import org.littletonrobotics.junction.Logger;
-
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -16,9 +14,9 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.util.RevUtil;
+import org.littletonrobotics.junction.Logger;
 
 public class CANFuelSubsystem extends SubsystemBase {
   private final SparkMax LeftIntakeLauncher;
