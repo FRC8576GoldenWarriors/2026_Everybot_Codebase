@@ -10,6 +10,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.util.RevUtil;
 
@@ -45,6 +46,7 @@ public class ClimberSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Climb/Climber Velocity", climberMotor.get());
     var climbStatus = RevUtil.checkSparkMaxState(climberMotor.getLastError());
     climbAlert.set(climbStatus.getFirst());
     climbAlert.setText(climbStatus.getSecond());

@@ -89,11 +89,11 @@ public class CANDriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Left Leader Velocity", leftLeader.get());
-    SmartDashboard.putNumber("Left Follower Velocity", leftFollower.get());
+    SmartDashboard.putNumber("Drive/Left Leader Velocity", leftLeader.get());
+    SmartDashboard.putNumber("Drive/Left Follower Velocity", leftFollower.get());
 
-    SmartDashboard.putNumber("Right Leader Velocity", rightLeader.get());
-    SmartDashboard.putNumber("Right Follower Velocity", rightFollower.get());
+    SmartDashboard.putNumber("Drive/Right Leader Velocity", rightLeader.get());
+    SmartDashboard.putNumber("Drive/Right Follower Velocity", rightFollower.get());
 
     var leftLeaderStatus = RevUtil.checkSparkMaxState(leftLeader.getLastError());
     var leftFollowerStatus = RevUtil.checkSparkMaxState(leftFollower.getLastError());

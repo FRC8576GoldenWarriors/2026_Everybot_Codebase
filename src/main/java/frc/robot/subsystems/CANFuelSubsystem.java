@@ -12,16 +12,33 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.RevUtil;
 
 public class CANFuelSubsystem extends SubsystemBase {
   private final SparkMax LeftIntakeLauncher;
   private final SparkMax RightIntakeLauncher;
   private final SparkMax Indexer;
 
+  private final Alert LeftIntakeLauncherAlert;
+  private final Alert RightIntakeLauncherAlert;
+  private final Alert IndexerAlert;
+
+  private final String LeftIntakeLauncherAlertBaseText = "Left Intake Launcher Motor (5): ";
+  private final String RightIntakeLauncherAlertBaseText = "Right Intake Launcher Motor (6): ";
+  private final String IndexerAlertBaseText = "Indexer Motor (6): ";
+
   /** Creates a new CANBallSubsystem. */
   public CANFuelSubsystem() {
+
+    LeftIntakeLauncherAlert = new Alert("Fuel/", LeftIntakeLauncherAlertBaseText, AlertType.kError);
+    RightIntakeLauncherAlert =
+        new Alert("Fuel/", RightIntakeLauncherAlertBaseText, AlertType.kError);
+    IndexerAlert = new Alert("Fuel/", IndexerAlertBaseText, AlertType.kError);
+
     // create brushed motors for each of the motors on the launcher mechanism
     LeftIntakeLauncher = new SparkMax(LEFT_INTAKE_LAUNCHER_MOTOR_ID, MotorType.kBrushless);
     RightIntakeLauncher = new SparkMax(RIGHT_INTAKE_LAUNCHER_MOTOR_ID, MotorType.kBrushless);
@@ -84,5 +101,22 @@ public class CANFuelSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Fuel/Left Intake Launcher Velocity", LeftIntakeLauncher.get());
+    SmartDashboard.putNumber("Fuel/Right Intake Launcher Velocity", RightIntakeLauncher.get());
+    SmartDashboard.putNumber("Fuel/Indexer Velocity", Indexer.get());
+
+    var leftIntakeLauncherStatus = RevUtil.checkSparkMaxState(LeftIntakeLauncher.getLastError());
+    var rightIntakeLauncherStatus = RevUtil.checkSparkMaxState(RightIntakeLauncher.getLastError());
+    var indexerStatus = RevUtil.checkSparkMaxState(Indexer.getLastError());
+
+    LeftIntakeLauncherAlert.set(leftIntakeLauncherStatus.getFirst());
+    RightIntakeLauncherAlert.set(rightIntakeLauncherStatus.getFirst());
+    IndexerAlert.set(indexerStatus.getFirst());
+
+    LeftIntakeLauncherAlert.setText(
+        LeftIntakeLauncherAlertBaseText + leftIntakeLauncherStatus.getSecond());
+    RightIntakeLauncherAlert.setText(
+        RightIntakeLauncherAlertBaseText + rightIntakeLauncherStatus.getSecond());
+    IndexerAlert.setText(IndexerAlertBaseText + indexerStatus.getSecond());
   }
 }
