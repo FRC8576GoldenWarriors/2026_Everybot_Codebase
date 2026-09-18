@@ -8,15 +8,20 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.RevUtil;
 
 public class ClimberSubsystem extends SubsystemBase {
   private final SparkMax climberMotor;
+  private final Alert climbAlert;
 
   /** Creates a new CANBallSubsystem. */
   public ClimberSubsystem() {
     // create brushed motors for each of the motors on the launcher mechanism
     climberMotor = new SparkMax(CLIMBER_MOTOR_ID, MotorType.kBrushed);
+    climbAlert = new Alert("Climb/", "Climb Motor (8)", AlertType.kError);
 
     // create the configuration for the climb moter, set a current limit and apply
     // the config to the controller
@@ -40,5 +45,8 @@ public class ClimberSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    var climbStatus = RevUtil.checkSparkMaxState(climberMotor.getLastError());
+    climbAlert.set(climbStatus.getFirst());
+    climbAlert.setText(climbStatus.getSecond());
   }
 }

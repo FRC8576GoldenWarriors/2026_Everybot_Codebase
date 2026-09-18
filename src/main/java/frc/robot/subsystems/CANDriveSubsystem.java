@@ -12,9 +12,12 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.RevUtil;
 
 public class CANDriveSubsystem extends SubsystemBase {
   private final SparkMax leftLeader;
@@ -24,12 +27,27 @@ public class CANDriveSubsystem extends SubsystemBase {
 
   private final DifferentialDrive drive;
 
+  private final Alert leftLeaderAlert;
+  private final Alert leftFollowerAlert;
+  private final Alert rightLeaderAlert;
+  private final Alert rightFollowerAlert;
+
+  private final String leftLeaderAlertBaseText = "Left Leader Motor (1): ";
+  private final String leftFollowerAlertBaseText = "Left Follower Motor (3): ";
+  private final String rightLeaderAlertBaseText = "Right Leader Motor (2): ";
+  private final String rightFollowerAlertBaseText = "Right Follower Motor (4): ";
+
   public CANDriveSubsystem() {
     // create brushed motors for drive
     leftLeader = new SparkMax(LEFT_LEADER_ID, MotorType.kBrushed);
     leftFollower = new SparkMax(LEFT_FOLLOWER_ID, MotorType.kBrushed);
     rightLeader = new SparkMax(RIGHT_LEADER_ID, MotorType.kBrushed);
     rightFollower = new SparkMax(RIGHT_FOLLOWER_ID, MotorType.kBrushed);
+
+    leftLeaderAlert = new Alert("Drive/", leftLeaderAlertBaseText, AlertType.kError);
+    leftFollowerAlert = new Alert("Drive/", leftFollowerAlertBaseText, AlertType.kError);
+    rightLeaderAlert = new Alert("Drive/", rightLeaderAlertBaseText, AlertType.kError);
+    rightFollowerAlert = new Alert("Drive/", rightFollowerAlertBaseText, AlertType.kError);
 
     // set up differential drive class
     drive = new DifferentialDrive(leftLeader, rightLeader);
@@ -73,8 +91,24 @@ public class CANDriveSubsystem extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putNumber("Left Leader Velocity", leftLeader.get());
     SmartDashboard.putNumber("Left Follower Velocity", leftFollower.get());
+
     SmartDashboard.putNumber("Right Leader Velocity", rightLeader.get());
     SmartDashboard.putNumber("Right Follower Velocity", rightFollower.get());
+
+    var leftLeaderStatus = RevUtil.checkSparkMaxState(leftLeader.getLastError());
+    var leftFollowerStatus = RevUtil.checkSparkMaxState(leftFollower.getLastError());
+    var rightLeaderStatus = RevUtil.checkSparkMaxState(rightLeader.getLastError());
+    var rightFollowerStatus = RevUtil.checkSparkMaxState(rightFollower.getLastError());
+
+    leftLeaderAlert.set(leftLeaderStatus.getFirst());
+    leftFollowerAlert.set(leftFollowerStatus.getFirst());
+    rightLeaderAlert.set(rightLeaderStatus.getFirst());
+    rightFollowerAlert.set(rightFollowerStatus.getFirst());
+
+    leftLeaderAlert.setText(leftLeaderAlertBaseText + leftLeaderStatus.getSecond());
+    leftFollowerAlert.setText(leftFollowerAlertBaseText + leftFollowerStatus.getSecond());
+    rightLeaderAlert.setText(rightLeaderAlertBaseText + rightLeaderStatus.getSecond());
+    rightFollowerAlert.setText(rightFollowerAlertBaseText + rightFollowerStatus.getSecond());
   }
 
   public void driveArcade(double xSpeed, double zRotation) {
